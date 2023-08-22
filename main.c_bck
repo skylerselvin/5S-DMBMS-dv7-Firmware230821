@@ -1,0 +1,37 @@
+/*
+ * main.c
+ *
+ * Created: 8/22/2022 10:08:34 PM
+ *  Author: skyle
+ */ 
+
+#define F_CPU 3333333UL
+#include <xc.h>
+#include <stdint.h>
+#include <util/delay.h>
+#include <avr/io.h>
+#include <stdio.h>
+
+int main(void)
+{
+	PORTB_DIRSET = 0xFF;
+	PORTA_DIRSET = 0b10000000;
+	PORTB_DIRCLR = PIN1_bm;
+	
+    while(1)
+    {
+		//int pauseTime = 1000;
+		//PORTB_OUT |= PIN0_bm;
+		//_delay_ms(pauseTime);
+		//PORTB_OUT &= ~PIN0_bm;
+		//_delay_ms(pauseTime);
+		
+		if(~PORTB.IN & PIN1_bm) {
+			PORTB_OUT |= PIN2_bm;
+			_delay_ms(100);
+		}
+		
+		PORTB_OUT &= ~PIN2_bm;
+		
+    }
+}
